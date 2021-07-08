@@ -10,11 +10,12 @@ console.log(`[${timestamp}] ${method} to ${url}`)
 next()
 }
 
-async function validateUserId(req, res, next){
+async function validateUserId(req, res, next) {
   try{
     const user = await User.getById(req.params.id)
     if (!user) {
-      res.status(404).json({
+      next({
+        status:404,
         message: 'no such user',
       })
     } else {
